@@ -1,3 +1,5 @@
+#try to solve the puzzle
+
 puzzle=[[1, 2, 3], [4, 5, 6], [7, 0, 8]]
 def zeroindex(puzzle):
     for i in range(3):
