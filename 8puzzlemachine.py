@@ -111,9 +111,9 @@ def machineplay(puzzle):
 
 
 (k,l)=zeroindex(puzzle)
-puzzle.append(k)
-puzzle.append(l)
 if check(puzzle):
+    puzzle.append(k)
+    puzzle.append(l)
     machineplay(puzzle)
 else:
     print("not solvable")
