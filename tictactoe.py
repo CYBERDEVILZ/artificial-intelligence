@@ -150,7 +150,7 @@ def play(board):
         i=i+1
         show_board(board)
         if winstates(board):
-            print("GAME OVER")
+            print("GAME OVER!")
             break
 
 show_board(board)
