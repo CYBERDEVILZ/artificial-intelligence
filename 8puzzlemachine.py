@@ -1,5 +1,5 @@
 import copy
-puzzle=[[1, 2, 3], [5, 6, 0], [7, 8, 4]]
+puzzle=[[1, 2, 3], [4, 5, 6], [7, 0, 8]]
 
 def zeroindex(puzzle):
     for i in range(3):
@@ -8,14 +8,6 @@ def zeroindex(puzzle):
                 k=i
                 l=j
     return(k,l)
-
-def show_board(puzzle):
-    for i in range(3):
-        for j in range(3):
-            if j != 2:
-                print("{}".format(puzzle[i][j]), end=' | ')
-            else:
-                print("{} | ".format(puzzle[i][j]), end='\n')
 
 def check(puzzle):
     count=0
