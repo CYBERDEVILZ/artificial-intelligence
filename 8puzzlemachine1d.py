@@ -1,4 +1,6 @@
-puzzle=[1, 2, 3, 4, 5, 0, 7, 8, 6]
+import time as t
+
+puzzle=[1, 2, 3, 0, 5, 4, 7, 6, 8]
 
 def zeroindex(puzzle):
     for i in range(9):
@@ -92,9 +94,9 @@ def machineplay(puzzle):
             else:
                 if statespace4 not in closedlist and statespace4 not in openlist:
                     openlist.append(statespace4)
-            closedlist.append(x)
-            x=openlist.pop(0)
-            a=x[9]
+        closedlist.append(x)
+        x=openlist.pop(0)
+        a=x[9]
     
     print("SOLVED!")
 
@@ -102,4 +104,7 @@ k=zeroindex(puzzle)
 print(k)
 if check(puzzle):
     puzzle.append(k)
+    start_time=t.time()
     machineplay(puzzle)
+    end_time=t.time()
+    print("TOTAL TIME: ", (end_time-start_time))
