@@ -1,6 +1,6 @@
 import time as t
 
-puzzle=[1, 2, 3, 0, 5, 4, 7, 6, 8]
+puzzle=[1, 2, 3, 8, 0, 5, 4, 7, 6]
 
 def zeroindex(puzzle):
     for i in range(9):
@@ -99,6 +99,8 @@ def machineplay(puzzle):
         a=x[9]
     
     print("SOLVED!")
+    print("OPEN LIST:", len(openlist))
+
 
 k=zeroindex(puzzle)
 print(k)
@@ -107,4 +109,5 @@ if check(puzzle):
     start_time=t.time()
     machineplay(puzzle)
     end_time=t.time()
-    print("TOTAL TIME: ", (end_time-start_time))
+    print("TOTAL TIME: ", (end_time-start_time), "seconds")
+    
