@@ -42,7 +42,6 @@ def machplay(board, p):
             if board[2][2] == ' ':
                 x.append(4)
             y=random.randint(0, len(x)-1)
-            p=p+1
             a=x[y]
             if a==1:
                 board[0][0] = 'X'
@@ -93,64 +92,74 @@ def play(board):
     i=0
     p=0
     while i < 5:
+        show_board(board)
         x=input("position: ")
         if int(x) == 1:
             if board[2][0] == " ":
                 board[2][0] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 2:
             if board[2][1] == " ":
                 board[2][1] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 3:
             if board[2][2] == " ":
                 board[2][2] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 4:
             if board[1][0] == " ":
                 board[1][0] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 5:
             if board[1][1] == " ":
                 board[1][1] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 6:
             if board[1][2] == " ":
                 board[1][2] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 7:
             if board[0][0] == " ":
                 board[0][0] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 8:
             if board[0][1] == " ":
                 board[0][1] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 9:
             if board[0][2] == " ":
                 board[0][2] = 0
+                show_board(board)
             else:
                 print("Invalid Move!")
                 continue
         else:
             print("Invalid Position!")
-            i-=1
+            continue
         i+=1
         if i < 5:
             if winstates(board) == 'h':
@@ -159,9 +168,8 @@ def play(board):
             p+=1
             if winstates(board) == 'm':
                 break
-            show_board(board)
     show_board(board)
         
 
-show_board(board)
+
 play(board)
