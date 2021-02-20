@@ -25,6 +25,7 @@ def check(puzzle):
 def machineplay(puzzle):
     solved=[1, 2, 3, 4, 5, 6, 7, 8, 0]
     openlist=[]
+    openLIST=[]
     closedlist=[]
     openlist.append(puzzle)
     x=[]
@@ -44,8 +45,9 @@ def machineplay(puzzle):
                 print(statespace1[10:])
                 break
             else:
-                if statespace1 not in closedlist and statespace1 not in openlist:
+                if statespace1[:9] not in closedlist and statespace1[:9] not in openLIST:
                     openlist.append(statespace1)
+                    openLIST.append(statespace1[:9])
         
         if a%3!=2:                                                  #right
             statespace2=x.copy()
@@ -60,9 +62,9 @@ def machineplay(puzzle):
                 print(statespace2[10:])
                 break
             else:
-                if statespace2 not in closedlist and statespace2 not in openlist:
+                if statespace2[:9] not in closedlist and statespace2[:9] not in openLIST:
                     openlist.append(statespace2)
-        
+                    openLIST.append(statespace2[:9])
         if a!=0 and a!=1 and a!=2:                                    #up
             statespace3=x.copy()
             temp=statespace3[a]
@@ -76,9 +78,10 @@ def machineplay(puzzle):
                 print(statespace3[10:])
                 break
             else:
-                if statespace3 not in closedlist and statespace3 not in openlist:
+                if statespace3[:9] not in closedlist and statespace3[:9] not in openLIST:
                     openlist.append(statespace3)
-        
+                    openLIST.append(statespace3[:9])
+
         if a!=6 and a!=7 and a!=8:                                    #down
             statespace4=x.copy()
             temp=statespace4[a]
@@ -92,18 +95,18 @@ def machineplay(puzzle):
                 print(statespace4[10:])
                 break
             else:
-                if statespace4 not in closedlist and statespace4 not in openlist:
+                if statespace4[:9] not in closedlist and statespace4[:9] not in openLIST:
                     openlist.append(statespace4)
-        closedlist.append(x)
+                    openLIST.append(statespace4[:9])
+        closedlist.append(x[:9])
         x=openlist.pop(0)
         a=x[9]
     
     print("SOLVED!")
-    print("OPEN LIST:", len(openlist))
+    print("CLOSED LIST:", len( closedlist), "nodes")
 
 
 k=zeroindex(puzzle)
-print(k)
 if check(puzzle):
     puzzle.append(k)
     start_time=t.time()
