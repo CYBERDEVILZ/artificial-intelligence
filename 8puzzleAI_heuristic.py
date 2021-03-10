@@ -1,0 +1,141 @@
+import time as t
+
+puzzle=[1, 0, 3, 8, 5, 7, 4, 2, 6]
+solved=[1, 2, 3, 4, 5, 6, 7, 8, 0]
+def zeroindex(puzzle):
+    for i in range(9):
+        if puzzle[i] == 0:
+            return i
+            break
+
+def check(puzzle):
+    count=0
+    for i in range(9):
+        for j in range(i+1, 9):
+            if j==9:
+                break
+            if puzzle[i]>puzzle[j] and puzzle[i]!=0 and puzzle[j]!=0:
+                count+=1
+    if (not count%2):
+        return True
+    else:
+        return False
+
+def heuristic(puzzle):         #finds the heursitic value
+    man_dist=sum(abs((val-1)%3 - i%3) + abs((val-1)//3 - i//3) for i, val in enumerate(puzzle) if val)
+    return man_dist
+        
+def min_heuristics(lists):     #finds the minimum heuristic among a list of heurisitc values and returns it's position
+    min=999999
+    for i in range(len(lists)):
+        if lists[i]<min:
+            min=lists[i]
+            index=i
+    return(index)
+
+def machineplay(puzzle):
+    openlist=[]
+    openLIST=[]
+    closedlist=[]
+    heuristicval=[]
+    openlist.append(puzzle)
+    x=[]
+    x=openlist.pop(0)
+    a=x[9]                                                          #stores the index of 0
+    while x[:9]!=solved:
+        if a%3!=0:                                                  #left
+            statespace1=x.copy()
+            temp=statespace1[a]
+            statespace1[a]=statespace1[a-1]
+            statespace1[a-1]=temp
+            statespace1[9]=a-1
+            statespace1.append("LEFT")
+            print(statespace1[:9], "left")
+            
+            if statespace1[:9] == solved:
+                print(statespace1[:9])
+                print(statespace1[10:])
+                break
+            else:
+                if statespace1[:9] not in closedlist and statespace1[:9] not in openLIST:
+                    openlist.append(statespace1)    #for printing the steps
+                    openLIST.append(statespace1[:9]) #to prevent loops
+                    heuristicval.append(heuristic(statespace1[:9]))
+
+        
+        if a%3!=2:                                                  #right
+            statespace2=x.copy()
+            temp=statespace2[a]
+            statespace2[a]=statespace2[a+1]
+            statespace2[a+1]=temp
+            statespace2[9]=a+1
+            statespace2.append("RIGHT")
+            print(statespace2[:9], "right")
+            
+            if statespace2[:9] == solved:
+                print(statespace2[:9])
+                print(statespace2[10:])
+                break
+            else:
+                if statespace2[:9] not in closedlist and statespace2[:9] not in openLIST:
+                    openlist.append(statespace2)
+                    openLIST.append(statespace2[:9])
+                    heuristicval.append(heuristic(statespace2[:9]))
+
+        if a!=0 and a!=1 and a!=2:                                    #up
+            statespace3=x.copy()
+            temp=statespace3[a]
+            statespace3[a]=statespace3[a-3]
+            statespace3[a-3]=temp
+            statespace3[9]=a-3
+            statespace3.append("UP")
+            print(statespace3[:9], "up")
+            
+            if statespace3[:9] == solved:
+                print(statespace3[:9])
+                print(statespace3[10:])
+                break
+            else:
+                if statespace3[:9] not in closedlist and statespace3[:9] not in openLIST:
+                    openlist.append(statespace3)
+                    openLIST.append(statespace3[:9])
+                    heuristicval.append(heuristic(statespace3[:9]))
+
+
+        if a!=6 and a!=7 and a!=8:                                    #down
+            statespace4=x.copy()
+            temp=statespace4[a]
+            statespace4[a]=statespace4[a+3]
+            statespace4[a+3]=temp
+            statespace4[9]=a+3
+            statespace4.append("DOWN")
+            print(statespace4[:9], "down")
+            if statespace4[:9] == solved:
+                print(statespace4[:9])
+                print(statespace4[10:])
+                break
+            else:
+                if statespace4[:9] not in closedlist and statespace4[:9] not in openLIST:
+                    openlist.append(statespace4)
+                    openLIST.append(statespace4[:9])
+                    heuristicval.append(heuristic(statespace4[:9]))
+        print(heuristicval)
+        closedlist.append(x[:9])
+        y=min_heuristics(heuristicval)
+        tem=heuristicval.pop(y)
+        x=openlist.pop(y)
+        a=x[9]
+    
+    print("SOLVED!")
+    print("CLOSED LIST:", len(closedlist), "nodes")
+
+
+k=zeroindex(puzzle)
+if check(puzzle):
+    puzzle.append(k)
+    start_time=t.time()
+    machineplay(puzzle)
+    end_time=t.time()
+    print("TOTAL TIME: ", (end_time-start_time), "seconds")
+
+    
