@@ -79,14 +79,24 @@ def machplay(board, p):
                         break
             
             if flag ==0 and glag==0:
-                for f in range(3):
-                    for g in range(3):
-                        if board[f][g] == ' ':
-                            board[f][g] = 'X'
-                            gulag=1
+                if board[0][0] == ' ':
+                    board[0][0] = 'X'     
+                elif board[0][2] == ' ':
+                    board[0][2] = 'X'                   
+                elif board[2][0] == ' ':
+                    board[2][0] = 'X' 
+                elif board[2][2] == ' ':
+                    board[2][2] = 'X'
+                
+                else:
+                    for f in range(3):
+                        for g in range(3):
+                            if board[f][g] == ' ':
+                                board[f][g] = 'X'
+                                gulag=1
+                                break
+                        if gulag==1:
                             break
-                    if gulag==1:
-                        break
 
 def play(board):
     i=0
