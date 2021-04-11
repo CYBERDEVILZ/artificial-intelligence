@@ -1,82 +1,88 @@
-#try to solve the puzzle
+import os
 
-puzzle=[[1, 2, 3], [4, 5, 6], [7, 0, 8]]
-def zeroindex(puzzle):
-    for i in range(3):
-        for j in range(3):
-            if puzzle[i][j] == 0:
-                k=i
-                l=j
-    return(k,l)
-
-def show_board(puzzle):
-    for i in range(3):
-        for j in range(3):
-            if j != 2:
-                print("{}".format(puzzle[i][j]), end=' | ')
-            else:
-                print("{} | ".format(puzzle[i][j]), end='\n')
+puzzle = [1, 0, 3, 4, 2, 5, 7, 8, 6]
+solved = [1, 2, 3, 4, 5, 6, 7, 8, 0]
 
 def check(puzzle):
     count=0
-    for i in range(3):
-        for j in range(3):
-            x = puzzle[i][j]
-            o=j+1
-            for k in range(i, 3):
-                for l in range(o, 3):
-                    y = puzzle[k][l]
-                    if x>y and x!=0 and y!=0:
-                        count+=1
-                o=0
+    for i in range(9):
+        for j in range(i+1, 9):
+            if j==9:
+                break
+            if puzzle[i]>puzzle[j] and puzzle[i]!=0 and puzzle[j]!=0:
+                count+=1
     if (not count%2):
-        print("solvable!")
-        print(count)
+        return True
     else:
-        print("non solvable!")
-        print(count)
+        return False
 
-def play(puzzle, k, l):
-    print("press w for up, a for left, d for right, s for down")
-    solved = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+def zeroindex(puzzle):
+    for i in range(9):
+        if puzzle[i] == 0:
+            return i
+            break
+
+def show_board(puzzle):
+            print("""\n+---+---+---+
+| {} | {} | {} |
++---+---+---+
+| {} | {} | {} |
++---+---+---+
+| {} | {} | {} |
++---+---+---+""".format(puzzle[0], puzzle[1], puzzle[2], puzzle[3], puzzle[4], puzzle[5], puzzle[6], puzzle[7], puzzle[8]))
+
+def userplay(puzzle):
+    print("\nPress W to swap UP, A to swap left, D to swap right and S to swap down")
+    show_board(puzzle)
     while puzzle != solved:
-        x=input("input: ")
-        if x=='w':
-            if k>0:
-                puzzle[k][l] = puzzle[k-1][l]
-                puzzle[k-1][l] = 0
-                k=k-1
+        x = input("\nEnter your choice: ")
+        index = zeroindex(puzzle)
+        if x.lower() == 'w':
+            if index - 3 < 0:
+                os.system("cls")
+                show_board(puzzle)
+                print("\nINVALID MOVE")
             else:
-                print("move not valid!")
+                puzzle[index], puzzle[index-3] = puzzle[index-3], puzzle[index]
+                os.system("cls")
+                show_board(puzzle)
         
-        if x=='s':
-            if k<2:
-                puzzle[k][l] = puzzle[k+1][l]
-                puzzle[k+1][l] = 0
-                k=k+1
+        elif x.lower() == 'a':
+            if index % 3 == 0:
+                os.system("cls")
+                show_board(puzzle)
+                print("\nINVALID MOVE")
             else:
-                print("move not valid!")
+                puzzle[index], puzzle[index-1] = puzzle[index-1], puzzle[index]
+                os.system("cls")
+                show_board(puzzle)
 
-        if x=='a':
-            if l>0:
-                puzzle[k][l] = puzzle[k][l-1]
-                puzzle[k][l-1] = 0
-                l=l-1
+        elif x.lower() == 's':
+            if index + 3 > 8:
+                os.system("cls")
+                show_board(puzzle)
+                print("\nINVALID MOVE")
             else:
-                print("move not valid!")
+                puzzle[index], puzzle[index+3] = puzzle[index+3], puzzle[index]
+                os.system("cls")
+                show_board(puzzle)
 
-        if x=='d':
-            if l<2:
-                puzzle[k][l] = puzzle[k][l+1]
-                puzzle[k][l+1] = 0
-                l=l+1
+        elif x.lower() == 'd':
+            if index % 3 == 2:
+                os.system("cls")
+                show_board(puzzle)
+                print("\nINVALID MOVE")
             else:
-                print("move not valid!")
+                puzzle[index], puzzle[index+1] = puzzle[index+1], puzzle[index]
+                os.system("cls")
+                show_board(puzzle)
+        
+        else:
+            os.system("cls")
+            show_board(puzzle)
+            print("\nINVALID MOVE")
+    
+    print("\nCONGRATULATIONS!! YOU HAVE SOLVED THE PUZZLE!!\n")
 
-        show_board(puzzle)
-    print("board solved!!")
 
-(k,l) = zeroindex(puzzle)
-show_board(puzzle)
-check(puzzle)
-play(puzzle, k, l)
+userplay(puzzle)
