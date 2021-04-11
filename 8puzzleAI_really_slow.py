@@ -1,6 +1,6 @@
 import time as t
 
-puzzle=[1, 2, 3, 8, 0, 5, 4, 7, 6]
+puzzle = [1, 0, 3, 4, 2, 5, 7, 8, 6]
 
 def zeroindex(puzzle):
     for i in range(9):
@@ -23,6 +23,8 @@ def check(puzzle):
 
 
 def machineplay(puzzle):
+    print("\nSOLVING...")
+    print("EVALUATING DIFFERENT STATESPACES...")
     solved=[1, 2, 3, 4, 5, 6, 7, 8, 0]
     openlist=[]
     openLIST=[]
@@ -38,10 +40,11 @@ def machineplay(puzzle):
             statespace1[a]=statespace1[a-1]
             statespace1[a-1]=temp
             statespace1[9]=a-1
-            print(statespace1[:9], "ss1")
+            print(statespace1[:9])
             statespace1.append("LEFT")
             if statespace1[:9] == solved:
-                print(statespace1[:9])
+                print("\nSOLVED!")
+                print("\nThe steps are..")
                 print(statespace1[10:])
                 break
             else:
@@ -55,10 +58,11 @@ def machineplay(puzzle):
             statespace2[a]=statespace2[a+1]
             statespace2[a+1]=temp
             statespace2[9]=a+1
-            print(statespace2[:9], "ss2")
+            print(statespace2[:9])
             statespace2.append("RIGHT")
             if statespace2[:9] == solved:
-                print(statespace2[:9])
+                print("\nSOLVED!")
+                print("\nThe steps are..")
                 print(statespace2[10:])
                 break
             else:
@@ -71,10 +75,11 @@ def machineplay(puzzle):
             statespace3[a]=statespace3[a-3]
             statespace3[a-3]=temp
             statespace3[9]=a-3
-            print(statespace3[:9], "ss3")
+            print(statespace3[:9])
             statespace3.append("UP")
             if statespace3[:9] == solved:
-                print(statespace3[:9])
+                print("\nSOLVED!")
+                print("\nThe steps are..")
                 print(statespace3[10:])
                 break
             else:
@@ -88,10 +93,11 @@ def machineplay(puzzle):
             statespace4[a]=statespace4[a+3]
             statespace4[a+3]=temp
             statespace4[9]=a+3
-            print(statespace4[:9], "ss4")
+            print(statespace4[:9])
             statespace4.append("DOWN")
             if statespace4[:9] == solved:
-                print(statespace4[:9])
+                print("\nSOLVED!")
+                print("\nThe steps are..")
                 print(statespace4[10:])
                 break
             else:
@@ -102,8 +108,7 @@ def machineplay(puzzle):
         x=openlist.pop(0)
         a=x[9]
     
-    print("SOLVED!")
-    print("CLOSED LIST:", len( closedlist), "nodes")
+    print("\nCLOSED LIST:", len( closedlist), "nodes")
 
 
 k=zeroindex(puzzle)
@@ -112,5 +117,5 @@ if check(puzzle):
     start_time=t.time()
     machineplay(puzzle)
     end_time=t.time()
-    print("TOTAL TIME: ", (end_time-start_time), "seconds")
+    print("TOTAL TIME: ", (end_time-start_time), "seconds\n")
     
