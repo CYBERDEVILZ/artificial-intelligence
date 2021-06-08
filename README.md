@@ -1,3 +1,3 @@
-# machine-learning
+# Artificial Intelligence
 
-Machine Learning Python codes for solving puzzles.
+Artificial Inteliigence Python codes for solving puzzles.
