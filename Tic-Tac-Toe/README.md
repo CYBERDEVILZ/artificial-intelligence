@@ -33,7 +33,7 @@
 ---
 
 # 2. TIC-TAC-TOE (USER vs AI)
-### (TicTacToeAI.py)
+### (TicTacToe_AI.py)
 - Instead of another user, the machine will play against you.
 - Developed using basic algorithm and some Tic-Tac-Toe tricks
 - I have played against it a thousand times and the highest I have gone is a DRAW.
