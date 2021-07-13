@@ -4,7 +4,7 @@
 
 ---
 # 1. 8 - PUZZLE PROBLEM
-#### (8Puzzle_user.py)
+### (8Puzzle_user.py)
 - There are 9 cells arranged in a 3x3 grid. Eight of them are numbered from 1 - 8 and one is left blank (in my case, I have numbered it to 0).
 - The rule of this game is to swap the blank cell with its adjacent cell and arrange the cells in ascending order (with the blank space in the last cell).   
   #### That is, convert this...   
@@ -31,7 +31,7 @@
 ---
 
 # 2. 8 - PUZZLE PROBLEM SOLVER (AI)
-#### (8PuzzleAI.py)
+### (8Puzzle_AI.py)
 - Uses **BEST FIRST SEARCH** to find the optimum solution.
 - Heuristic function used is **MANHATTAN DISTANCE**
 - Feed the 8 - puzzle problem board values and it will spit out the steps.
