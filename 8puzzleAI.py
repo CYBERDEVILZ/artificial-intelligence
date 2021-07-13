@@ -1,6 +1,6 @@
 import time as t
 
-puzzle=[1, 0, 3, 8, 5, 7, 4, 2, 6]
+puzzle=[]
 solved=[1, 2, 3, 4, 5, 6, 7, 8, 0]
 def zeroindex(puzzle):
     for i in range(9):
@@ -50,11 +50,11 @@ def machineplay(puzzle):
             statespace1[a-1]=temp
             statespace1[9]=a-1
             statespace1.append("LEFT")
-            print(statespace1[:9], "left")
             
             if statespace1[:9] == solved:
-                print(statespace1[:9])
-                print(statespace1[10:])
+                print("SOLVED!")
+                print("The steps to solve are:- \n")
+                print(", ".join(statespace1[10:]))
                 break
             else:
                 if statespace1[:9] not in closedlist and statespace1[:9] not in openLIST:
@@ -70,11 +70,11 @@ def machineplay(puzzle):
             statespace2[a+1]=temp
             statespace2[9]=a+1
             statespace2.append("RIGHT")
-            print(statespace2[:9], "right")
             
             if statespace2[:9] == solved:
-                print(statespace2[:9])
-                print(statespace2[10:])
+                print("SOLVED!")
+                print("The steps to solve are:- \n")
+                print(", ".join(statespace2[10:]))
                 break
             else:
                 if statespace2[:9] not in closedlist and statespace2[:9] not in openLIST:
@@ -89,11 +89,11 @@ def machineplay(puzzle):
             statespace3[a-3]=temp
             statespace3[9]=a-3
             statespace3.append("UP")
-            print(statespace3[:9], "up")
             
             if statespace3[:9] == solved:
-                print(statespace3[:9])
-                print(statespace3[10:])
+                print("SOLVED!")
+                print("The steps to solve are:- \n")
+                print(", ".join(statespace3[10:]))
                 break
             else:
                 if statespace3[:9] not in closedlist and statespace3[:9] not in openLIST:
@@ -109,33 +109,54 @@ def machineplay(puzzle):
             statespace4[a+3]=temp
             statespace4[9]=a+3
             statespace4.append("DOWN")
-            print(statespace4[:9], "down")
             if statespace4[:9] == solved:
-                print(statespace4[:9])
-                print(statespace4[10:])
+                print("\nSOLVED!")
+                print("\nThe steps to solve are:- ")
+                print(", ".join(statespace4[10:]))
                 break
             else:
                 if statespace4[:9] not in closedlist and statespace4[:9] not in openLIST:
                     openlist.append(statespace4)
                     openLIST.append(statespace4[:9])
                     heuristicval.append(heuristic(statespace4[:9]))
-        print(heuristicval)
         closedlist.append(x[:9])
         y=min_heuristics(heuristicval)
         tem=heuristicval.pop(y)
         x=openlist.pop(y)
         a=x[9]
     
-    print("SOLVED!")
-    print("CLOSED LIST:", len(closedlist), "nodes")
+    # print("SOLVED!")
+    # print("CLOSED LIST:", len(closedlist), "nodes")
+
+def show_board(puzzle):
+            print("""\n+---+---+---+
+| {} | {} | {} |
++---+---+---+
+| {} | {} | {} |
++---+---+---+
+| {} | {} | {} |
++---+---+---+""".format(puzzle[0], puzzle[1], puzzle[2], puzzle[3], puzzle[4], puzzle[5], puzzle[6], puzzle[7], puzzle[8]))
 
 
+def enterBoard(puzzle):
+    hmm = "n"
+    while(hmm=="n"):
+        print("\nEnter the board values with spaces: ")
+        puzzle = list(map(int, input().split()))
+        print("\nIs the following board correct?")
+        show_board(puzzle)
+        print('\n')
+        hmm = input("[Y/N]: ").lower()
+    return puzzle
+
+
+puzzle = enterBoard(puzzle)
 k=zeroindex(puzzle)
 if check(puzzle):
     puzzle.append(k)
-    start_time=t.time()
+    # start_time=t.time()
     machineplay(puzzle)
-    end_time=t.time()
-    print("TOTAL TIME: ", (end_time-start_time), "seconds")
+    # end_time=t.time()
+    # print("TOTAL TIME: ", (end_time-start_time), "seconds")
 
     
