@@ -1,4 +1,4 @@
-import random
+import random, os
 board=[[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
 def show_board(board):
@@ -107,64 +107,79 @@ def play(board):
         if int(x) == 1:
             if board[2][0] == " ":
                 board[2][0] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
+                
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         elif int(x) == 2:
             if board[2][1] == " ":
                 board[2][1] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
+                
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         elif int(x) == 3:
             if board[2][2] == " ":
                 board[2][2] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
+                
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         elif int(x) == 4:
             if board[1][0] == " ":
                 board[1][0] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
+                
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         elif int(x) == 5:
             if board[1][1] == " ":
                 board[1][1] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
+                
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         elif int(x) == 6:
             if board[1][2] == " ":
                 board[1][2] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
+                
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         elif int(x) == 7:
             if board[0][0] == " ":
                 board[0][0] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
+                
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         elif int(x) == 8:
             if board[0][1] == " ":
                 board[0][1] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
             else:
                 print("Invalid Move!")
                 continue
         elif int(x) == 9:
             if board[0][2] == " ":
                 board[0][2] = 0
-                show_board(board)
+                os.system("cls" if os.name=='nt' else "clear")
             else:
+                os.system("cls" if os.name=='nt' else "clear")
                 print("Invalid Move!")
                 continue
         else:
@@ -173,11 +188,15 @@ def play(board):
         i+=1
         if i < 5:
             if winstates(board) == 'h':
+                print("YOU WON!")
                 break
             machplay(board, p)
             p+=1
             if winstates(board) == 'm':
+                print("MACHINE WON!")
                 break
+        else:
+            print("IT'S A DRAW!")
     show_board(board)
         
 
