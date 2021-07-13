@@ -1,3 +1,4 @@
+import os
 # a basic tic tac toe game
 board=[[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 def show_board(board):
@@ -148,6 +149,7 @@ def play(board):
             print("Invalid Position! Try again")
             i=i-1
         i=i+1
+        os.system("cls" if os.name=='nt' else "clear")
         show_board(board)
         if winstates(board):
             print("GAME OVER!")
