@@ -1,5 +1,7 @@
-# Artificial Intelligence Python codes for solving puzzles.
+# Artificial Intelligence Python codes for solving puzzles and problems.
 
+## NOTE
+This repository was created solely to discuss the various artificial intelligence codes written in Python that can be used to solve puzzles and problems. If you have any idea or algorithm, please feel free to update this repository as it will help all of us to grow as a community.
 ---
 
 # 1. TIC-TAC-TOE (TWO USERS)
