@@ -1,7 +1,5 @@
 # Artificial Intelligence Python codes for solving puzzles.
 
-### All the codes are written purely by me
-
 ---
 
 # 1. TIC-TAC-TOE (TWO USERS)
