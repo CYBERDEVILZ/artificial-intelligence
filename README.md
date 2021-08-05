@@ -1,3 +1,5 @@
+![](https://img.shields.io/static/v1?label=OPEN-SOURCED&message=Yes&color=blueviolet)
+
 # Artificial Intelligence Python codes for solving puzzles and problems.
 
 ## NOTE
