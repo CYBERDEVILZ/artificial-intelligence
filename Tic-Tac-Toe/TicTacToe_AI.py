@@ -1,204 +1,229 @@
-import random, os
-board=[[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+# imports
+import math
+import os
 
-def show_board(board):
-    print("+---+---+---+")
-    print("| ", end="")
-    print(board[0][0], board[0][1], board[0][2], sep=" | ", end="")
-    print(" | ")
-    print("+---+---+---+")
-    print("| ", end="")
-    print(board[1][0], board[1][1], board[1][2], sep=" | ", end="")
-    print(" | ")
-    print("+---+---+---+")
-    print("| ", end="")
-    print(board[2][0], board[2][1], board[2][2], sep=" | ", end="")
-    print(" | ")
-    print("+---+---+---+")
+# Global variables
+huPlayer = 'O'
+aiPlayer = 'X'
+inValidEntry = False
+running = True
+gameover = False
+who = "ai"
+realBoard = [
+    [" ", " ", " ", ],
+    [" ", " ", " ", ],
+    [" ", " ", " ", ]
+]
 
-def winstates(board):
-    if (board[0][0]==0 and board[0][1]==0 and board[0][2]==0) or (board[1][0]==0 and board[1][1]==0 and board[1][2]==0) or (board[2][0]==0 and board[2][1]==0 and board[2][2]==0) or (board[0][0]==0 and board[1][0]==0 and board[2][0]==0) or (board[0][1]==0 and board[1][1]==0 and board[2][1]==0) or (board[0][2]==0 and board[1][2]==0 and board[2][2]==0) or (board[0][0]==0 and board[1][1]==0 and board[2][2]==0) or (board[0][2]==0 and board[1][1]==0 and board[2][0]==0):
-        return 'h'
-    elif (board[0][0]=='X' and board[0][1]=='X' and board[0][2]=='X') or (board[1][0]=='X' and board[1][1]=='X' and board[1][2]=='X') or (board[2][0]=='X' and board[2][1]=='X' and board[2][2]=='X') or (board[0][0]=='X' and board[1][0]=='X' and board[2][0]=='X') or (board[0][1]=='X' and board[1][1]=='X' and board[2][1]=='X') or (board[0][2]=='X' and board[1][2]=='X' and board[2][2]=='X') or (board[0][0]=='X' and board[1][1]=='X' and board[2][2]=='X') or (board[0][2]=='X' and board[1][1]=='X' and board[2][0]=='x'):
-        return 'm'
-    else:
-        return 0
 
-def machplay(board, p):
-    flag=0
-    glag=0
-    gulag=0
-    x=[]
-    if board[1][1] ==' ':
-        board[1][1] = 'X'
-    else:
-        if p < 1:
-            if board[0][0] ==' ':
-                x.append(1)
-            if board[0][2] == ' ':
-                x.append(2)
-            if board[2][0] == ' ':
-                x.append(3)
-            if board[2][2] == ' ':
-                x.append(4)
-            y=random.randint(0, len(x)-1)
-            a=x[y]
-            if a==1:
-                board[0][0] = 'X'
-            elif a==2:
-                board[0][2] = 'X'
-            elif a==3:
-                board[2][0] = 'X'
-            else:
-                board[2][2] = 'X'
-        
+# helping functions
+def inputHandler():
+    choice = int(input("position: "))
+    print('\n')
+    global inValidEntry
+    inValidEntry = False
+    play = Game()
+    play.turn(huPlayer, choice-1)
+
+    if play.checkWin(huPlayer):
+        play.gameOver(huPlayer)
+
+    elif (not play.gameDraw() and not inValidEntry):
+        play.aiPlays(realBoard)
+        if play.checkWin(aiPlayer):
+            play.gameOver(aiPlayer)
+
+    elif play.gameDraw():
+        play.gameOver("no one")
+
+
+# Classes
+class Board:
+    def __init__(self):
+        self.realBoard = realBoard
+        self.invalidEntry = False
+
+    def generate(self):
+
+        print("+---+---+---+")
+        print("| ", end="")
+        print(realBoard[0][0], realBoard[0][1], realBoard[0][2], sep=" | ", end="")
+        print(" | ")
+        print("+---+---+---+")
+        print("| ", end="")
+        print(realBoard[1][0], realBoard[1][1], realBoard[1][2], sep=" | ", end="")
+        print(" | ")
+        print("+---+---+---+")
+        print("| ", end="")
+        print(realBoard[2][0], realBoard[2][1], realBoard[2][2], sep=" | ", end="")
+        print(" | ")
+        print("+---+---+---+")
+
+    def prompt(self):
+        answer = input("\nDo you like to play more? (Y/N): ")
+        print("")
+        if(answer.lower() == "y"):
+            return True
         else:
-            for b in range(3):
-                for c in range(3):
-                    if board[b][c] == ' ':
-                        board[b][c] = 'X'
-                        if winstates(board)=='m':
-                            flag=1
-                            break
-                        else:
-                            board[b][c] = ' '
-                if flag==1:
-                    break
-            if flag==0:
-                for d in range(3):
-                    for e in range(3):
-                        if board[d][e] == ' ':
-                            board[d][e] = 0
-                            if winstates(board)=='h':
-                                board[d][e] = 'X'
-                                glag=1
-                                break
-                            else:
-                                board[d][e] = ' '
-                    if glag==1:
-                        break
-            
-            if flag ==0 and glag==0:
-                if board[0][0] == ' ':
-                    board[0][0] = 'X'     
-                elif board[0][2] == ' ':
-                    board[0][2] = 'X'                   
-                elif board[2][0] == ' ':
-                    board[2][0] = 'X' 
-                elif board[2][2] == ' ':
-                    board[2][2] = 'X'
-                
-                else:
-                    for f in range(3):
-                        for g in range(3):
-                            if board[f][g] == ' ':
-                                board[f][g] = 'X'
-                                gulag=1
-                                break
-                        if gulag==1:
-                            break
+            return False
 
-def play(board):
-    i=0
-    p=0
-    while i < 5:
-        show_board(board)
-        x=input("position: ")
-        if int(x) == 1:
-            if board[2][0] == " ":
-                board[2][0] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-                
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
-        elif int(x) == 2:
-            if board[2][1] == " ":
-                board[2][1] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-                
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
-        elif int(x) == 3:
-            if board[2][2] == " ":
-                board[2][2] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-                
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
-        elif int(x) == 4:
-            if board[1][0] == " ":
-                board[1][0] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-                
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
-        elif int(x) == 5:
-            if board[1][1] == " ":
-                board[1][1] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-                
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
-        elif int(x) == 6:
-            if board[1][2] == " ":
-                board[1][2] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-                
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
-        elif int(x) == 7:
-            if board[0][0] == " ":
-                board[0][0] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-                
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
-        elif int(x) == 8:
-            if board[0][1] == " ":
-                board[0][1] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-            else:
-                print("Invalid Move!")
-                continue
-        elif int(x) == 9:
-            if board[0][2] == " ":
-                board[0][2] = 0
-                os.system("cls" if os.name=='nt' else "clear")
-            else:
-                os.system("cls" if os.name=='nt' else "clear")
-                print("Invalid Move!")
-                continue
+    def resetGame(self):
+        global realBoard
+        realBoard = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+
+    def emptySquares(self):
+        for i in range(3):
+            for j in range(3):
+                if(realBoard[i][j] == " "):
+                    return True
+        return False
+
+
+class Game(Board):
+    def __init__(self):
+        super().__init__()
+        self.bestScore = -100000
+        self.bestMove = [0, 0]
+        self.alpha = -100000
+        self.beta = 100000
+
+    def turn(self, player, square):
+        row = 2 - math.floor(square / 3)
+        col = square % 3
+        if square<9 and square>0:
+
+            if realBoard[row][col] == " ":
+                realBoard[row][col] = player
+
         else:
-            print("Invalid Position!")
-            continue
-        i+=1
-        if i < 5:
-            if winstates(board) == 'h':
-                print("YOU WON!")
-                break
-            machplay(board, p)
-            p+=1
-            if winstates(board) == 'm':
-                print("MACHINE WON!")
-                break
+            global inValidEntry
+            inValidEntry = True
+            print("Invalid Entry. Try again!")
+
+    def checkWin(self, player):
+        if((player == aiPlayer) and ((realBoard[0][0] == 'X' and realBoard[0][1] == 'X' and realBoard[0][2] == 'X') or (realBoard[1][0] == 'X' and realBoard[1][1] == 'X' and realBoard[1][2] == 'X') or (realBoard[2][0] == 'X' and realBoard[2][1] == 'X' and realBoard[2][2] == 'X') or (realBoard[2][0] == 'X' and realBoard[1][0] == 'X' and realBoard[0][0] == 'X') or (realBoard[2][1] == 'X' and realBoard[1][1] == 'X' and realBoard[0][1] == 'X') or (realBoard[2][2] == 'X' and realBoard[1][2] == 'X' and realBoard[0][2] == 'X') or (realBoard[2][2] == 'X' and realBoard[1][1] == 'X' and realBoard[0][0] == 'X') or (realBoard[2][0] == 'X' and realBoard[1][1] == 'X' and realBoard[0][2] == 'X'))):
+            return True
+
+        if((player == huPlayer) and ((realBoard[0][0] == 'O' and realBoard[0][1] == 'O' and realBoard[0][2] == 'O') or (realBoard[1][0] == 'O' and realBoard[1][1] == 'O' and realBoard[1][2] == 'O') or (realBoard[2][0] == 'O' and realBoard[2][1] == 'O' and realBoard[2][2] == 'O') or (realBoard[2][0] == 'O' and realBoard[1][0] == 'O' and realBoard[0][0] == 'O') or (realBoard[2][1] == 'O' and realBoard[1][1] == 'O' and realBoard[0][1] == 'O') or (realBoard[2][2] == 'O' and realBoard[1][2] == 'O' and realBoard[0][2] == 'O') or (realBoard[2][2] == 'O' and realBoard[1][1] == 'O' and realBoard[0][0] == 'O') or (realBoard[2][0] == 'O' and realBoard[1][1] == 'O' and realBoard[0][2] == 'O'))):
+            return True
+
+        return False
+
+    def gameOver(self, player):
+        global who
+        if(player == huPlayer):
+            who = "hu"
+        elif(player == aiPlayer):
+
+            who = "ai"
+        elif(player == "no one"):
+
+            who = "none"
+        global gameover
+        gameover = True
+
+    def gameDraw(self):
+        for squares in realBoard:
+            for square in squares:
+                if(square == " "):
+                    return False
+
+        return True
+
+    def aiPlays(self, board):
+        self.bestScore = -100000
+        self.bestMove = [0, 0]
+        self.alpha = -100000
+        self.beta = 100000
+        for i in range(3):
+            for j in range(3):
+                if realBoard[i][j] == " ":
+                    realBoard[i][j] = "X"
+                    self.score = self.minimax(
+                        0, False, self.alpha, self.beta)
+                    realBoard[i][j] = " "
+                    if self.score > self.bestScore:
+                        self.bestScore = self.score
+                        self.bestMove[0] = i
+                        self.bestMove[1] = j
+
+        realBoard[self.bestMove[0]][self.bestMove[1]] = "X"
+
+    def minimax(self, depth, maximize, alpha, beta):
+        self.result = "a"
+        if(self.checkWin(aiPlayer)):
+            self.result = 10
+            return 10 - depth
+
+        elif(self.checkWin(huPlayer)):
+            self.result = 10
+            return -10 + depth
+
+        elif(self.result == "a" and not self.emptySquares()):
+            self.result = 0
+            return 0
+
+        if(maximize):
+            newBestScore = -100000
+            self.flag = 0
+            for i in range(3):
+                for j in range(3):
+                    if realBoard[i][j] == " ":
+                        realBoard[i][j] = "X"
+                        newScore = self.minimax(
+                            depth + 1, False, self.alpha, self.beta)
+                        realBoard[i][j] = " "
+                        newBestScore = max(newBestScore, newScore)
+                        self.alpha = max(self.alpha, newBestScore)
+                        # if(self.beta <= self.alpha):
+                        #     self.flag = 1
+                        #     break
+                # if(self.flag):
+                #     break
+
+            return newBestScore
+
         else:
-            print("IT'S A DRAW!")
-    show_board(board)
-        
+            newBestScore = 100000
+            self.nflag = 0
+            for i in range(3):
+                for j in range(3):
+                    if realBoard[i][j] == " ":
+                        realBoard[i][j] = "O"
+                        newScore = self.minimax(
+                            depth + 1, True, self.alpha, self.beta)
+                        realBoard[i][j] = " "
+                        newBestScore = min(newBestScore, newScore)
+                        self.beta = min(self.beta, newBestScore)
+                        # if(self.beta <= self.alpha):
+                        #     self.nflag = 1
+                        #     break
+                # if(self.nflag):
+                #     break
+
+            return newBestScore
 
 
-play(board)
+play = Game()
+board = Board()
+
+
+while(running):
+    gameover = False
+    play.generate()
+    inputHandler()
+    # os.system("cls")
+    # print(realBoard)
+    if(gameover):
+        play.generate()
+        if(who == "hu"):
+            print(
+                "\t\nTHE HUMAN HAS WON!! Wait.. How is that even possible!? Your code's buggy then")
+        elif(who == "ai"):
+            print(
+                "\t\nTHE A.I. HAS WON!! Better Luck Next Time\t\n")
+
+        elif(who == "none"):
+            print("\t\nGood! You managed to DRAW with the A.I.\t\n")
+        running = play.prompt()
+        play.resetGame()
