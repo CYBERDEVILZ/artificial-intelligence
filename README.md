@@ -144,15 +144,15 @@ The AI then prints the minimum number of steps it took to achieve the final stat
 ![image](https://user-images.githubusercontent.com/55954313/129288413-958bf521-7a3f-4910-a9ee-4f80f01fe349.png)   
    
 In the above case, the solution makes perfect sense:-
-1. FILL JUG1 COMPLETELY
+1. FILL JUG1 COMPLETELY   
    **Jug1** : 3
    **Jug2** : 0   
    
-2. JUG1 TO JUG2
+2. JUG1 TO JUG2   
    **Jug1** : 2
    **Jug2** : 1 (as the **maximum volume** of **Jug2** is 1, it can store only 1 unit of water)   
    
-3. EMPTY JUG2
+3. EMPTY JUG2   
    **Jug1** : 2
    **Jug2** : 0 
 Which is our final state
