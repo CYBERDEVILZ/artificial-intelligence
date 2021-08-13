@@ -14,7 +14,7 @@ This repository was created solely to discuss the various Artificial Intelligenc
 - Players take turn by turn to position their mark.   
 - The game does not have a GUI as of now. It is a console version.   
    
-## More can be found inside the corresponding folder   
+### More can be found inside its corresponding folder   
 
 ---
 
@@ -25,7 +25,7 @@ This repository was created solely to discuss the various Artificial Intelligenc
 - I have played against it a thousand times and the highest I have gone is a DRAW.
 - GIVE IT A TRY. CAN YOU BEAT IT?   
 
-## More can be found inside the corresponding folder  
+### More can be found inside its corresponding folder  
 
 ---
 
@@ -41,7 +41,7 @@ This repository was created solely to discuss the various Artificial Intelligenc
   
   ![image](https://user-images.githubusercontent.com/55954313/125401360-ad972a80-e3d0-11eb-81e2-7ea72e4e05df.png)   
   
-  ## More can be found inside the corresponding folder  
+### More can be found inside its corresponding folder  
   
 ---
 
@@ -52,7 +52,7 @@ This repository was created solely to discuss the various Artificial Intelligenc
 - Feed the 8 - puzzle problem board values and it will spit out the steps.
 - Solves the problem **blazing fast!**   
 
-## More can be found inside the corresponding folder  
+### More can be found inside its corresponding folder  
 
 ---
 
@@ -72,7 +72,7 @@ This repository was created solely to discuss the various Artificial Intelligenc
 - At any given time,  only **one operation** is allowed.
 - Jugs can be filled and emptied any number of times. There is **no limit**.   
 
-## More can be found inside the corresponding folder  
+### More can be found inside its corresponding folder  
    
 ---
 
