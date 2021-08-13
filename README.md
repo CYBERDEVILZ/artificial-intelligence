@@ -154,7 +154,8 @@ In the above case, the solution makes perfect sense:-
    
 3. EMPTY JUG2   
    **Jug1** : 2   
-   **Jug2** : 0 
-Which is our final state
+   **Jug2** : 0   
+   
+Which is our **final state**
 ---
 
