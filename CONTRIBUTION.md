@@ -18,7 +18,7 @@ Cryptonite relies on Python as its core language. So, inorder to make contributi
 
 ## Non Technincal? No Problemo
 
-Cryptonite is evolving at a very fast rate. So many changes are being made to make it adaptive and upto date. This means, we change/update our documentations very often. Keeping a proper and neat documentation is what we are after. For those contributing towards documentation, knowing **Markdown** will be of great help.
+For those contributing towards documentation, knowing **Markdown** will be of great help.
 
 Here are some resources for you to get started:
 
@@ -32,7 +32,7 @@ You are free to choose your style of workflow as far as you are not making a PR 
 For beginners, here's what you'd have to do:
 
 1. Fork the Project
-2. Clone your fork to your local machine via `git clone https://github.com/YOUR_USERNAME/Cryptonite.git`
+2. Clone your fork to your local machine via `git clone https://github.com/YOUR_USERNAME/artificial-intelligence.git`
 3. Create a branch in your local machine: `git checkout -b <branchname>`
 4. Make changes/commits to this branch
 5. Push changes to your fork: `git push origin <branchname>`
