@@ -37,12 +37,12 @@ def inputHandler():
         play.gameOver("no one")
 
 
-# Classes
+# Class for board
 class BoardClass:
     def __init__(self):
         self.realBoard = realBoard
         self.invalidEntry = False
-
+#function for generating board
     def generate(self):
 
         print("+---+---+---+")
@@ -58,7 +58,7 @@ class BoardClass:
         print(realBoard[2][0], realBoard[2][1], realBoard[2][2], sep=" | ", end="")
         print(" | ")
         print("+---+---+---+")
-
+#prompt function
     def prompt(self):
         answer = input("\nDo you like to play more? (Y/N): ")
         print("")
@@ -66,11 +66,11 @@ class BoardClass:
             return True
         else:
             return False
-
+#reset game function
     def resetGame(self):
         global realBoard
         realBoard = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
-
+#empty square function
     def emptySquares(self):
         for i in range(3):
             for j in range(3):
@@ -86,7 +86,7 @@ class Game(BoardClass):
         self.bestMove = [0, 0]
         self.alpha = -100000
         self.beta = 100000
-
+#function for turn
     def turn(self, player, square):
         row = 2 - math.floor(square / 3)
         col = square % 3
@@ -99,7 +99,7 @@ class Game(BoardClass):
             global inValidEntry
             inValidEntry = True
             print("Invalid Entry. Try again!")
-
+#function for winner checking
     def checkWin(self, player):
         if((player == aiPlayer) and ((realBoard[0][0] == 'X' and realBoard[0][1] == 'X' and realBoard[0][2] == 'X') or (realBoard[1][0] == 'X' and realBoard[1][1] == 'X' and realBoard[1][2] == 'X') or (realBoard[2][0] == 'X' and realBoard[2][1] == 'X' and realBoard[2][2] == 'X') or (realBoard[2][0] == 'X' and realBoard[1][0] == 'X' and realBoard[0][0] == 'X') or (realBoard[2][1] == 'X' and realBoard[1][1] == 'X' and realBoard[0][1] == 'X') or (realBoard[2][2] == 'X' and realBoard[1][2] == 'X' and realBoard[0][2] == 'X') or (realBoard[2][2] == 'X' and realBoard[1][1] == 'X' and realBoard[0][0] == 'X') or (realBoard[2][0] == 'X' and realBoard[1][1] == 'X' and realBoard[0][2] == 'X'))):
             return True
@@ -108,7 +108,7 @@ class Game(BoardClass):
             return True
 
         return False
-
+#gamne over function
     def gameOver(self, player):
         global who
         if(player == huPlayer):
@@ -129,7 +129,7 @@ class Game(BoardClass):
                     return False
 
         return True
-
+#function for AI player
     def aiPlays(self, board):
         self.bestScore = -100000
         self.bestMove = [0, 0]
