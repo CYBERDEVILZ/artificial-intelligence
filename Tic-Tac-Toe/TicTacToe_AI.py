@@ -38,7 +38,7 @@ def inputHandler():
 
 
 # Classes
-class Board:
+class BoardClass:
     def __init__(self):
         self.realBoard = realBoard
         self.invalidEntry = False
@@ -79,7 +79,7 @@ class Board:
         return False
 
 
-class Game(Board):
+class Game(BoardClass):
     def __init__(self):
         super().__init__()
         self.bestScore = -100000
