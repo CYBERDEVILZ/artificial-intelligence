@@ -1,6 +1,7 @@
 import os
 # a basic tic tac toe game
 board=[[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+#function for displaying board
 def show_board(board):
     print("+---+---+---+")
     print("| ", end="")
@@ -15,7 +16,7 @@ def show_board(board):
     print(board[2][0], board[2][1], board[2][2], sep=" | ", end="")
     print(" | ")
     print("+---+---+---+")
-
+#function for winner state
 def winstates(board):
     if (board[0][0]==0 and board[0][1]==0 and board[0][2]==0) or (board[1][0]==0 and board[1][1]==0 and board[1][2]==0) or (board[2][0]==0 and board[2][1]==0 and board[2][2]==0) or (board[0][0]==0 and board[1][0]==0 and board[2][0]==0) or (board[0][1]==0 and board[1][1]==0 and board[2][1]==0) or (board[0][2]==0 and board[1][2]==0 and board[2][2]==0) or (board[0][0]==0 and board[1][1]==0 and board[2][2]==0) or (board[0][2]==0 and board[1][1]==0 and board[2][0]==0):
         return 1
@@ -23,7 +24,7 @@ def winstates(board):
         return 1
     else:
         return 0
-
+#play function
 def play(board):
     i=0
     while i < 9: 
